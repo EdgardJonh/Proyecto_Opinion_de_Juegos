@@ -1,11 +1,32 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-
+import NotFound from '@/components/notFound.vue'
+import OpinionesView from '@/views/OpinionesView.vue'
+import Likes from "@/components/Likes.vue";
+ 
 const routes = [
   {
+    //ruta
     path: '/',
     name: 'home',
     component: HomeView
+  },
+  {
+    path: '/:pathMatch(.*)',
+    name: 'notFound',
+    component : NotFound
+  },
+  {
+    path: '/likes',
+    name:'likes',
+    component: Likes
+  },
+  {
+    //ruta dinmica
+    path:'/opiniones/:nombre',
+    name: 'opiniones',
+    component: OpinionesView,
+    props: true
   },
   {
     path: '/about',
