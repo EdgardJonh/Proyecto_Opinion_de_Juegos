@@ -9,12 +9,24 @@
     
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
-  <body>
+  <body class="d-flex justify-content-center">
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
-    <p>pagina no encontrada</p>
-    <a href="/proyecto_opinion_juegos_produccion/">volver</a>
+    <div class="container m-2 " style="background-color:#1a002f;">
+        <div class="row">
+            <div class="col-6" style="color: white;">
+                <h1>Oops 404!</h1>
+                <h4>lo sentimos pagina no encontrada</h4>
+                <p>has click para volver en el siguente link</p>
+                <a href="/proyecto_opinion_juegos_produccion/" style="text-decoration: none;">Volver</a>
+            </div>
+            <div class="col-6">
+                <img class="w-50" src="https://neonize.gumlet.io/wp-content/uploads/2022/08/Game-Over-Neon-Light-Sign-Neonize.png" alt="">
+            </div>
+        </div>
+    </div>
+ 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
   </body>
 </html>
