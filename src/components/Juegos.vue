@@ -1,6 +1,5 @@
 <template>
     <div id="juegos">
-        <p>Componente juegos</p>
         <div class="contenedorPadre">
             <div v-for="(juego, index) in juegos" :key="index" class="card m-2" style="width: 18rem;">
             <img :src="juego.background_image" class="card-img-top" alt="">
@@ -15,7 +14,7 @@
             </ul>
             <div class="card-body">
                 <a @click="mostrarOpiniones(juego.name)" class="btn btn-primary">opinar</a>
-                <a href="" class="m-1" @click.prevent="agregarLike" ><font-awesome-icon :icon="['fas', 'heart']" style="color: red;"/></a>
+                <a href="" class="m-1" @click.prevent="agregarLike(juego.name)" ><font-awesome-icon :icon="['fas', 'heart']" style="color: red;"/></a>
             </div>
         </div>
         </div>
@@ -36,6 +35,7 @@ export default {
         }
     },
     methods:{
+        //Consumo la api con axios que previamente debe estar importado antes de export y cargado el paquete en packag.json
         consumirApi: function () {
             let url = 'https://api.rawg.io/api/games?key=09c68133658d476f85bd0bdc9fbc8ebd'
             axios(url)
@@ -59,10 +59,11 @@ export default {
         mostrarOpiniones: function (nombreJuego) {
             this.$router.push(`/opiniones/${nombreJuego}`)
         },
-        agregarLike: function () {
-            this.$router.push(`/likes`)
+        agregarLike: function (nombreDelJuego) {
+            this.$router.push(`/likes/${nombreDelJuego}`)
         }
     },
+    // esto es uun hooks que se ejecuta automaticament  al ejecutar lafuncion consumirApi() cuando carga la pagina
     created(){
         this.consumirApi()
     }

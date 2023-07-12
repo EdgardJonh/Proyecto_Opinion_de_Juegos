@@ -17,9 +17,11 @@ const routes = [
     component : NotFound
   },
   {
-    path: '/likes',
+    path: '/likes/:nombre',
     name:'likes',
-    component: Likes
+    component: Likes,
+    props: true
+
   },
   {
     //ruta dinmica

@@ -5,15 +5,15 @@
             <form >
                 <div  class="mb-3">
                     <label for="txtNombre" class="form-label d-flex justify-content-start">Nombre</label>
-                    <input type="text" class="form-control"  id="txtNombre" aria-describedby="emailHelp">
+                    <input type="text" class="form-control" v-model="nombres" id="txtNombre" aria-describedby="emailHelp">
                    
                 </div>
                 <div class="mb-3">
                     <label for="txtOpinion" class="form-label d-flex justify-content-start">Opinion</label>
-                    <input type="text" class="form-control" id="txtOpinion">
+                    <input type="text" class="form-control" v-model="Opinion" id="txtOpinion">
                 </div>
 
-                <button  @click="cargarOpinion" type="button" class="btn btn-primary d-flex justify-content-start">Cargar</button>
+                <button  @click="cargarOpinion()" type="button" class="btn btn-primary d-flex justify-content-start">{{ nombreBoton }}</button>
             </form>
             <hr>
             <h2>A continuacion podras ver las opiniones</h2>
@@ -32,7 +32,7 @@
                         <div class="accordion-body">
                            <p>{{ estosDatos.laopinion}}</p>
                            <button type="button" @click="eliminar(index)" class="btn btn-primary">Eliminar</button>
-                           <button type="button" class="btn btn-warning">Edtitar</button>
+                           <button type="button" @click="actualizar(index)" class="btn btn-warning">Edtitar</button>
                         </div>
                     </div>
                 </div>
@@ -56,28 +56,51 @@ export default {
             ],
             Opinion:'',
             nombres: '',
-            index:0
+            index:0,
+            nombreBoton: 'Agregar'
+
                 
         }
     },
     methods:{
         cargarOpinion: function () {
-             this.Opinion = document.getElementById('txtOpinion').value
+            if (this.nombreBoton == 'Agregar') {
+                this.Opinion = document.getElementById('txtOpinion').value
             this.nombres = document.getElementById('txtNombre').value
            
 
             this.losDatos.push({elnombre: this.nombres,laopinion: this.Opinion})
             console.log(this.losDatos)
            this.limpiarInput()
+            } else if(this.nombreBoton== 'Actualizar') {
+                let actualizarDatos = {
+                    elnombre: this.nombres,
+                    laopinion: this.Opinion
+                }
+                this.losDatos.splice(this.index,1,actualizarDatos)
+                this.nombreBoton = 'Agregar'
+                this.limpiarInput()
+            }
+           
 
         },
         //FUNCION QUE LIMPIA LOS INPUT
         limpiarInput: function () {
             document.getElementById('txtOpinion').value = '' 
             document.getElementById('txtNombre').value = ''
+            this.nombres= ''
+            this.Opinion = ''
         },
         eliminar: function (index) {
             this.losDatos.splice(index,1)
+            this.limpiarInput()
+        },
+        actualizar:function (indexx) {
+            this.nombres = this.losDatos[indexx].elnombre
+            this.Opinion = this.losDatos[indexx].laopinion
+            this.nombreBoton = 'Actualizar'
+            this.index = indexx
+            
         }
        
     }
